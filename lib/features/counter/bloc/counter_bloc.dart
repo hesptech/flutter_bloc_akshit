@@ -9,6 +9,7 @@ part 'counter_state.dart';
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   CounterBloc() : super(CounterInitial()) {
     on<CounterIncrementevent>(counterIncrementevent);
+    on<CounterShowSnackbarEvent>(counterShowSnackbarEvent);
   }
 
   int value = 0;
@@ -18,5 +19,10 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
       value = value + 1;
 
       emit(CounterIncrementState(val: value));
+      //emit(CounterIncrementActionState());
     }
+
+  FutureOr<void> counterShowSnackbarEvent(CounterShowSnackbarEvent event, Emitter<CounterState> emit) {
+    emit(CounterShowSnackbarActionState());
+  }
 }

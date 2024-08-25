@@ -4,3 +4,5 @@ part of 'counter_bloc.dart';
 sealed class CounterEvent {}
 
 class CounterIncrementevent extends CounterEvent{}
+
+class CounterShowSnackbarEvent extends CounterEvent{}
