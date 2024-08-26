@@ -11,12 +11,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('BLoC Akshit'),
         centerTitle: true,
+        backgroundColor: Colors.grey,
       ),
       body: const Center(
-        child: Text('data'),
+        child: Text('home content'),
       ),
-
-      bottomNavigationBar: const Text('data'),
     );
   }
 }

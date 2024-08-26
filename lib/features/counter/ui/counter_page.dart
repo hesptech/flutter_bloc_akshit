@@ -32,11 +32,11 @@ class _CounterPageState extends State<CounterPage> {
         listener: (context, state) {
           if (state is CounterShowSnackbarActionState) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Snackbar')));
-          } /* else if(state is CounterIncrementActionState) {
+          } else if(state is CounterIncrementActionState) {
             setState(() {
               val = val + 1;
             });
-          } */
+          }
         },
         child: Center(
           child: Container(
@@ -70,16 +70,14 @@ class _CounterPageState extends State<CounterPage> {
             case CounterIncrementState:
               final successState = state as CounterIncrementState;
               return Center(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        successState.val.toString(),
-                        style: const TextStyle(fontSize: 60),
-                      )
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      successState.val.toString(),
+                      style: const TextStyle(fontSize: 60),
+                    )
+                  ],
                 ),
               );
               
