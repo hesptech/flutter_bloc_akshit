@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_akshit/features/counter/bloc_snackbar/snackbar_bloc.dart';
 
-import '../../bloc/counter_bloc.dart';
+
 
 class BlocListenerScreen extends StatefulWidget {
   const BlocListenerScreen({super.key});
@@ -11,13 +12,8 @@ class BlocListenerScreen extends StatefulWidget {
 }
 
 class _BlocListenerScreenState extends State<BlocListenerScreen> {
-  CounterBloc counterBloc = CounterBloc();
 
-  @override
-  void initState() {
-    counterBloc.add(CounterIncrementevent());
-    super.initState();
-  }
+  SnackbarBloc snackbarBloc = SnackbarBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +23,27 @@ class _BlocListenerScreenState extends State<BlocListenerScreen> {
         centerTitle: true,
         backgroundColor: Colors.grey,
       ),
-      body: BlocListener<CounterBloc, CounterState>(
+      body: /* BlocListener<CounterBloc, CounterState>(
         bloc: counterBloc,
         listener: (context, state) {
           if (state is CounterShowSnackbarActionState) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Snackbar')));
           }
-        },
+        }, */
+        BlocListener<SnackbarBloc, SnackbarState>(
+          bloc: snackbarBloc,
+          listener: (context, state) {
+            if(state is SnackbarShowSnackbarActionState) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Snackbar II')));
+            }
+          },
+
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(onPressed: () {
-                  counterBloc.add(CounterShowSnackbarEvent());
+                  snackbarBloc.add(SnackbarShowSnackbarEvent());
               }, child: const Text('Snackbar'))
             ],
           ),
