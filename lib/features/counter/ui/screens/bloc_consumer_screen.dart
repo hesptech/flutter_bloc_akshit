@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/counter_bloc.dart';
+import '../../bloc_consumer/consumer_bloc.dart';
 
 class BlocConsumerScreen extends StatefulWidget {
   const BlocConsumerScreen({super.key});
@@ -11,11 +11,11 @@ class BlocConsumerScreen extends StatefulWidget {
 }
 
 class _BlocConsumerScreenState extends State<BlocConsumerScreen> {
-  CounterBloc counterBloc = CounterBloc();
+  ConsumerBloc consumerBloc = ConsumerBloc();
 
   @override
   void initState() {
-    counterBloc.add(CounterIncrementevent());
+    consumerBloc.add(ConsumerIncrementevent());
     super.initState();
   }
 
@@ -27,20 +27,20 @@ class _BlocConsumerScreenState extends State<BlocConsumerScreen> {
         centerTitle: true,
         backgroundColor: Colors.grey,
       ),
-      body: BlocConsumer<CounterBloc, CounterState>(
-        bloc: counterBloc,
-        listenWhen: ((previous, current) => current is CounterActionState),
-        buildWhen: ((previous, current) => current is! CounterActionState),
+      body: BlocConsumer<ConsumerBloc, ConsumerState>(
+        bloc: consumerBloc,
+        listenWhen: ((previous, current) => current is ConsumerActionState),
+        buildWhen: ((previous, current) => current is! ConsumerActionState),
         listener: (context, state) {
-          if (state is CounterShowSnackbarActionState) {
+          if (state is ConsumerShowSnackbarActionState) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Snackbar')));
           }           
         },
         builder: (context, state) {
 
           switch(state.runtimeType) {
-            case CounterIncrementState:
-              final successState = state as CounterIncrementState;
+            case ConsumerIncrementState:
+              final successState = state as ConsumerIncrementState;
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +52,7 @@ class _BlocConsumerScreenState extends State<BlocConsumerScreen> {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        counterBloc.add(CounterShowSnackbarEvent());
+                        consumerBloc.add(ConsumerShowSnackbarEvent());
                       },
                       child: const Text('Snackbar'),
                     ),
@@ -63,34 +63,12 @@ class _BlocConsumerScreenState extends State<BlocConsumerScreen> {
             default:
               return const Center(child: Text("Not found"),);
           }
-
-
-
-
-          /* return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '0',
-                  style: const TextStyle(fontSize: 60),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    counterBloc.add(CounterShowSnackbarEvent());
-                  },
-                  child: const Text('Snackbar'),
-                )
-              ],
-            ),
-          ); */
         },
       ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            counterBloc.add(CounterIncrementevent());
+            consumerBloc.add(ConsumerIncrementevent());
           }),
     );
   }

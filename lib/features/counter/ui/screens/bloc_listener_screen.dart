@@ -44,7 +44,7 @@ class _BlocListenerScreenState extends State<BlocListenerScreen> {
             children: [
               ElevatedButton(onPressed: () {
                   snackbarBloc.add(SnackbarShowSnackbarEvent());
-              }, child: const Text('Snackbar'))
+              }, child: const Text('Snackbar II'))
             ],
           ),
         ),

@@ -13,11 +13,11 @@ class BlocBuilderScreen extends StatefulWidget {
 class _BlocBuilderScreenState extends State<BlocBuilderScreen> {
   CounterBloc counterBloc = CounterBloc();
 
-  @override
+  /* @override
   void initState() {
     counterBloc.add(CounterIncrementevent());
     super.initState();
-  }
+  } */
   
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _BlocBuilderScreenState extends State<BlocBuilderScreen> {
         centerTitle: true,
         backgroundColor: Colors.grey,
       ),
-      body: BlocBuilder<CounterBloc, CounterState>(
+      /* body: BlocBuilder<CounterBloc, CounterState>(
         bloc: counterBloc,
         builder: (context, state) {
           switch(state.runtimeType) {
@@ -40,7 +40,34 @@ class _BlocBuilderScreenState extends State<BlocBuilderScreen> {
                     Text(
                       successState.val.toString(),
                       style: const TextStyle(fontSize: 60),
-                    )
+                    ),
+                    const SizedBox(height: 20),
+                    Text('data')
+                  ],
+                ),
+              );
+              
+            default:
+              return const Center(child: Text("Not found"),);
+          }
+          
+        },
+      ), */
+
+
+      body: BlocBuilder<CounterBloc, CounterState>(
+        builder: (context, state) {
+          switch(state.runtimeType) {
+            case CounterIncrementState:
+              final successState = state as CounterIncrementState;
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      successState.val.toString(),
+                      style: const TextStyle(fontSize: 60),
+                    ),
                   ],
                 ),
               );
@@ -52,10 +79,11 @@ class _BlocBuilderScreenState extends State<BlocBuilderScreen> {
         },
       ),
 
+
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            counterBloc.add(CounterIncrementevent());
+            context.read<CounterBloc>().add(CounterIncrementevent());
           }),
     );
   }
