@@ -20,6 +20,9 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
+
+    final successState = context.watch<CounterBloc>().value;
+
     return Scaffold(
       body: <Widget>[
         /// Home page
@@ -28,13 +31,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         const BlocListenerScreen(),
         const BlocConsumerScreen(),
       ][currentPageIndex],
-      bottomNavigationBar: BlocBuilder<CounterBloc, CounterState>(  
-        builder: (context, state) {
-
-          //counterBloc.add(CounterInitialevent());
-          final successState = context.watch<CounterBloc>().value;
-
-          return NavigationBar(
+      bottomNavigationBar: NavigationBar(
             onDestinationSelected: (int index) {
               setState(() {
                 currentPageIndex = index;
@@ -68,9 +65,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
                 label: 'BLoC Consumer',
               ),
             ],
-          );
-        },
-      ),
+          )
     );
   }
 }
