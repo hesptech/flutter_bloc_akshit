@@ -11,7 +11,7 @@ class BlocBuilderScreen extends StatefulWidget {
 }
 
 class _BlocBuilderScreenState extends State<BlocBuilderScreen> {
-  CounterBloc counterBloc = CounterBloc();
+  //CounterBloc counterBloc = CounterBloc();
 
   /* @override
   void initState() {
